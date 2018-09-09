@@ -73,18 +73,20 @@ private function validateInput(){
     for($i = 0 ; $i < sizeof($this->gameData)-1; $i++) {
         $tmparr = $this->gameData[$i];
         $min = 0;
-        $max = 0;
+        $max = 10;
         if (sizeof($tmparr) == 2) {
             //echo $tmparr[0];
-            echo (($min <= $tmparr[0]) && ($tmparr[0] <= $max));
-            if (($min <= $tmparr[0]) && ($tmparr[0] <= $max)) {
-                $error = "++++++++++++Invalid Frame Data,  " . $tmparr[0];
+
+            if (!($tmparr[0] >= $min && $tmparr[0] <= $max)) {
+                $error = "sdsadasInvalid Frame Data,  " . $tmparr[0];
+                echo (($min <= $tmparr[0]) && ($tmparr[0] <= $max));
+
                 array_push($this->errorArray, $error);
                 return;
             }
-            if (($min <= $tmparr[1]) && ($tmparr[1] <= $max)) {
+            if (!($tmparr[1] >= $min && $tmparr[1] <= $max)) {
 
-                $error = "================Invalid Frame Data,  " . $tmparr[1];
+                $error = "Invalid Frame Data,  " . $tmparr[1];
                 array_push($this->errorArray, $error);
                 return;
             }
@@ -92,7 +94,7 @@ private function validateInput(){
         } elseif (sizeof($tmparr) == 1) {
             if ($tmparr[0] != 10) {
 
-                $error = "-------------- Invalid Frame Data,  " . $tmparr[0];
+                $error = "Invalid Frame Data,  " . $tmparr[0];
                 array_push($this->errorArray, $error);
                 return;
             }
@@ -125,14 +127,16 @@ private function validateInput(){
         list($v1, $v2) = $this->gameData[9];
         $min = 0;
         $max = 10;
-        if (($min <= $v1) && ($v1 <= $max)) {
 
-            $error = "================Invalid Frame Data,  " . $v1;
+
+        if (!($v1 >= $min && $v1 <= $max)) {
+
+            $error = "Invalid Frame Data,  " . $v1;
             array_push($this->errorArray, $error);
             return;
         }
-        if (($min <= $v2) && ($v2 <= $max)) {
-            $error = "================Invalid Frame Data,  " . $v2;
+        if (!($v2 >= $min && $v2 <= $max)) {
+            $error = "Invalid Frame Data,  " . $v2;
             array_push($this->errorArray, $error);
             return;
         }
