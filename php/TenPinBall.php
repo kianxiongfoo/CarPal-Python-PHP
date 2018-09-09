@@ -25,9 +25,11 @@ function getResults(){
     $this->validateInput();
 
     if(isset($this->errorArray[0])){
-        echo $this->errorArray[0];
+        $err =  $this->errorArray[0];
         unset($this->errorArray[0]);
-        exit;
+        return $err;
+
+       // exit;
     }
     else {
         $index=0;
@@ -35,7 +37,7 @@ function getResults(){
             array_push($this->resultArray,$this->calculateFrameResult($frame,$index));
             $index = $index + 1;
         }
-        var_dump($this->resultArray);
+       return $this->resultArray;
     }
 }
 
@@ -64,6 +66,12 @@ else{
 }
 }
 private function validateInput(){
+    if (!is_array($this->gameData)){
+
+            $error = "Invalid Game Data";
+            array_push($this->errorArray,$error);
+            return;
+    }
     if(sizeof($this->gameData) != 10) {
         $error = "Invalid Game Data, Expecting 10 Frames, ".sizeof($this->gameData) ." Frames given!";
        array_push($this->errorArray,$error);
@@ -117,6 +125,12 @@ private function validateInput(){
             array_push($this->errorArray, $error);
             return;
         }
+        if($v1 > 10 || $v2 > 10 || $v3 > 10) {
+            $error = "Invalid Score, Score should not exceed to 10 each game, current score " . json_encode($this->gameData[9]);
+            array_push($this->errorArray, $error);
+            return;
+        }
+
         if(array_sum($this->gameData[9]) > 30) {
             $error = "Invalid Score, Score should not exceed to 30, current score " . array_sum($this->gameData[9]);
             array_push($this->errorArray, $error);
