@@ -4,11 +4,11 @@ Ten-pin bowling game
 
 Python Source python/TenPinBall.py
 
-PHP Source PHP/TenPinBall.php
+PHP Source PHP/init.php
 
 
 run :
 
 py TenPinBall.py
 
-php TenPinBall.php
+php init.php
